@@ -1,4 +1,4 @@
-version: '2'
+version: '3.1'
 
 services:
   jenkins:
@@ -9,7 +9,7 @@ services:
       - 8080:8080
       - 50000:50000
     volumes:
-      - ./jenkins_home:/var/jenkins_home
+      - ./jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
 
   archiva:
@@ -19,7 +19,7 @@ services:
     ports:
       - 8081:8080
     volumes:
-      - ./archiva_mnt:/archiva_mnt
+      - ./archiva:/archiva_mnt
 
 #  sonarqube:
 #    image: sonarqube
