@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  jenkins:
+    image: jenkins
+    container_name: jenkins
+    restart: always
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  archiva:
+    image: xetusoss/archiva
+    container_name: archiva
+    restart: always
+    ports:
+      - 8081:8080
+    volumes:
+      - ./archiva_mnt:/archiva_mnt
+
+#  sonarqube:
+#    image: sonarqube
+#    container_name: sonar
+#    restart: always
+#    ports:
+#      - 9000:9000
+#      - 9092:9092
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    ports:
+      - 8082:80
+      - 8443:443
+#      - 8022:22
+    volumes:
+      - ./gitlab/config:/etc/gitlab
+      - ./gitlab/logs:/var/log/gitlab
+      - ./gitlab/data:/var/opt/gitlab
+
